@@ -85,15 +85,15 @@ public class Main {
                 teacher3Students.add(firstGradeStudents.get(i));
             }
         }
-        Map<Teacher, Set> studentsAndTeachers = new HashMap<>();
+        Map<Teacher, Set<Student>> studentsAndTeachers = new HashMap<>();
 
         studentsAndTeachers.put(teacher1, teacher1Students);
         studentsAndTeachers.put(teacher2, teacher2Students);
         studentsAndTeachers.put(teacher3, teacher3Students);
 
         Set<Teacher> keyset = studentsAndTeachers.keySet();
-        Collection<Set> values = studentsAndTeachers.values();
-
+        Collection<Set<Student>> values = studentsAndTeachers.values();
+        Set<Map.Entry<Teacher, Set<Student>>> entrySet = studentsAndTeachers.entrySet();
 
         for (Teacher teacher : keyset){
             System.out.println(teacher);
@@ -102,6 +102,13 @@ public class Main {
             for (Object student : set){
                 System.out.println(student);
             }
+        }
+        for (Teacher teacher : keyset){
+            List<String> students = new ArrayList<>();
+            for (Student student : studentsAndTeachers.get(teacher)){
+                students.add(student.getFirstName() + " " + student.getLastName());
+            }
+            System.out.println(teacher.getFirstName() + " " + teacher.getLastName() + ": " + students);
         }
     }
 }
